@@ -12,26 +12,27 @@ class Email_importer:
     Klasse zum Konvertieren von Emails in ein Textformat
 
     Verwendung:
-    NON_SPAM = 'dateipfad/zu/nichtspam_emails"
-    SPAM = 'dateipfad/zu/spam_emails"
-    importer = Email_importer(NON_SPAM, SPAM)
-    list_non_spam, list_spam = importer.get_text()
+    EMAIL = 'dateipfad/zu/spam_emails"
+    importer = Email_importer(EMAIL)
+    email = importer.get_text()
     """
 
-    def __init__(self, email_dir):
+    def __init__(self, email_path):
         """
         Konstruktor, dem die E-Mail-Verzeichnisse übergeben, werden in denen die Emails abgelegt sind
+        :param email_path: Verzeichnis der Emails
         """
-        self.email_dir = email_dir
+        self.emails_path = email_path
         self.__read_emails()
 
     def __read_email(self, directory, filename):
         with open(os.path.join(directory, filename), "rb") as f:
             return ep.BytesParser(policy=email.policy.default).parse(f)
 
+
     def __read_emails(self):
-        email_filenames = [name for name in sorted(os.listdir(self.email_dir))]
-        self.emails = [self.__read_email(directory=self.email_dir, filename=name) for name in email_filenames]
+        email_filenames = [name for name in sorted(os.listdir(self.emails_path))]
+        self.ham_emails = [self.__read_email(directory=self.emails_path, filename=name) for name in email_filenames]
 
     def __get_email_structure(self, email):
         if isinstance(email, str):
@@ -69,9 +70,10 @@ class Email_importer:
 
     def get_text(self):
         """
-        Diese Methode liefert eine Liste der Nicht-Spam- und Spam-E-Mails im Textformat
-        :return: (Liste von Nicht-Spam-Emails im Textformat, Liste von Spam-Emails im Textformat)
+        Diese Methode liefert eine Liste der Emails im Textformat
+        :return: Liste von Emails
         """
-        mail = [self.__email_to_plain(email) for email in self.emails]
-        mail = [item for item in mail if item is not None]
-        return mail
+        emails = [self.__email_to_plain(email) for email in self.ham_emails]
+        emails = [item for item in emails if item is not None]
+        return emails
+
