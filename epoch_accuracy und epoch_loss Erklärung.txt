@@ -1,0 +1,3 @@
+Blau: Training
+Grün: Validation vor implementierung von Dropout-Layer
+Pink: Validation nach implementierung von Dropout-Layer
