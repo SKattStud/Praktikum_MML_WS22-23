@@ -1,5 +1,3 @@
-import pandas as pd
-import numpy as np
 import os
 import email
 from email import parser as ep

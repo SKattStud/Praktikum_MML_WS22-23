@@ -1,4 +1,3 @@
-import io
 import json
 import tensorflow as tf
 from keras import layers

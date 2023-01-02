@@ -1,12 +1,8 @@
-import io
 import json
-
 import keras
-import tensorflow as tf
 from keras.preprocessing.text import tokenizer_from_json
 from pipeline import Pipeline
 from config import MODEL_DIR, PRODUCTION
-import numpy as np
 
 
 # 10.	Implementieren des eigentlichen Spam-Filters (Classifier)

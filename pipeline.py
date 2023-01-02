@@ -1,7 +1,6 @@
 import numpy as np
 from sklearn.model_selection import train_test_split
 from email_import import Email_importer
-import tensorflow as tf
 from keras.preprocessing.text import Tokenizer
 from keras.utils import pad_sequences
 from config import MAXLEN, SPAM, NON_SPAM
