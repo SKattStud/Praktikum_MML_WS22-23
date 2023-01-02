@@ -23,7 +23,9 @@ class Classifier:
         pipeline = Pipeline([mail_dir, ], tokenizer=self.tokenizer)
         email_liste, empty, empty, empty, empty = (pipeline.execute())
         # 3.3 Prediction anhand des geladenen Models
-        return self.model.predict(email_liste).round()
+        confidence = self.model.predict(email_liste).flatten()
+        predictions = (confidence > 0.5).astype("int32")
+        return predictions.tolist(), confidence.tolist()
 
 
 if __name__ == "__main__":
