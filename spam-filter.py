@@ -18,7 +18,7 @@ class Classifier:
 
         self.tokenizer = tokenizer_from_json(json_tokenizer)
 
-    def predict(self,mail_dir):
+    def predict(self, mail_dir):
         # 3.2 Data Pipeline auf die Emails in der mail_dir anwenden (mittels der Klasse Pipeline)
         pipeline = Pipeline([mail_dir, ], tokenizer=self.tokenizer)
         email_liste, empty, empty, empty, empty = (pipeline.execute())

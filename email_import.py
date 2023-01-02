@@ -27,7 +27,6 @@ class Email_importer:
         with open(os.path.join(directory, filename), "rb") as f:
             return ep.BytesParser(policy=email.policy.default).parse(f)
 
-
     def __read_emails(self):
         email_filenames = [name for name in sorted(os.listdir(self.emails_path))]
         self.ham_emails = [self.__read_email(directory=self.emails_path, filename=name) for name in email_filenames]
@@ -74,4 +73,3 @@ class Email_importer:
         emails = [self.__email_to_plain(email) for email in self.ham_emails]
         emails = [item for item in emails if item is not None]
         return emails
-

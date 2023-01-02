@@ -6,6 +6,7 @@ from datetime import datetime
 from pipeline import Pipeline
 from config import EMBEDDING_DIM, MAXLEN, SPAM, NON_SPAM, MODEL_DIR
 
+
 class Trainer:
     def __init__(self, spam, non_spam, model_dir):
         self.spam = spam
@@ -23,6 +24,7 @@ class Trainer:
         model.add(layers.Conv1D(128, 5, activation='relu'))
         model.add(layers.GlobalMaxPool1D())
         model.add(layers.Dense(20, activation='relu'))
+        model.add(layers.Dropout(0.05))  # Dropout hinzugefügt. Prezision kaum verbessert, da sie bereits sehr hoch ist.
         model.add(layers.Dense(1, activation='sigmoid'))
         model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
 
